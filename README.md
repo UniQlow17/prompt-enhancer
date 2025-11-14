@@ -16,7 +16,7 @@
 
 1. Скачайте расширение с GitHub.
 ```bash
-git clone https://github.com/UniQlow17/prompt-enhancer.git
+git clone git@github.com:UniQlow17/prompt-enhancer.git
 ```
 2. Откройте расширение в Chrome [здесь](chrome://extensions/).
 3. Нажмите на кнопку "Загрузить распакованное расширение".
