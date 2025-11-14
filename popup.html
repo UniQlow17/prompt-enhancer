@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prompt Enhancer</title>
+    <link rel="stylesheet" href="styles/popup.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <span class="logo-icon">🪄</span>
+                <div class="logo-text">
+                    <h1>Prompt Enhancer</h1>
+                    <span class="subtitle">AI-powered optimization</span>
+                </div>
+            </div>
+            <button id="settingsButton" class="icon-button" title="Настройки">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3" />
+                </svg>
+            </button>
+        </header>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <button class="mode-button active" data-mode="basic">
+                <span class="mode-icon">⚡</span>
+                <span class="mode-label">Basic</span>
+            </button>
+            <button class="mode-button" data-mode="detail">
+                <span class="mode-icon">🎯</span>
+                <span class="mode-label">Detail</span>
+            </button>
+        </div>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <label for="promptInput" class="input-label">
+                <span>Исходный промпт</span>
+                <span class="char-count">0 / 2000</span>
+            </label>
+            <textarea id="promptInput" placeholder="Введите ваш промпт для улучшения..." maxlength="2000"
+                rows="4"></textarea>
+        </section>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button id="enhanceButton" class="btn btn-primary">
+                <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                <span>Улучшить промпт</span>
+            </button>
+            <button id="copyButton" class="btn btn-secondary" disabled>
+                <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+                <span>Копировать</span>
+            </button>
+        </div>
+
+        <!-- Status Message -->
+        <div id="status" class="status" style="display: none;"></div>
+
+        <!-- Result Section -->
+        <section class="result-section">
+            <label class="result-label">
+                <span>Улучшенный промпт</span>
+                <button id="clearButton" class="clear-button" style="display: none;" title="Очистить">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </label>
+            <div id="resultContainer" class="result-container">
+                <div class="empty-state">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                    <p>Здесь появится улучшенная версия вашего промпта</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <span class="footer-text">Powered by Gemini 2.5 Flash</span>
+            <span class="version">v1.0.0</span>
+        </footer>
+    </div>
+
+    <script src="scripts/config.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/popup.js"></script>
+</body>
+
+</html>
