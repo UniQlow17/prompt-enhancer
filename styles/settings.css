@@ -1,18 +1,54 @@
-/* Settings Page Styles */
+/* ===== ЦВЕТОВЫЕ СХЕМЫ ===== */
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --primary-color: #667eea;
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --text-tertiary: #9ca3af;
-    --background: #f9fafb;
-    --surface: #ffffff;
-    --border: #e5e7eb;
+    /* Светлая тема - минималистичная и чистая */
+    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    --primary-color: #6366f1;
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+
+    --bg-page: #f8fafc;
+    --bg-main: #ffffff;
+    --bg-surface: #f8fafc;
+
+    --border-color: #e2e8f0;
+    --border-focus: #6366f1;
+
     --success: #10b981;
     --error: #ef4444;
     --info: #3b82f6;
+    --warning: #f59e0b;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
+/* Темная тема - глубокая и контрастная */
+[data-theme="dark"] {
+    --primary-gradient: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
+    --primary-color: #818cf8;
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #64748b;
+
+    --bg-page: #020617;
+    --bg-main: #0f172a;
+    --bg-surface: #1e293b;
+
+    --border-color: #334155;
+    --border-focus: #818cf8;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.6);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== БАЗОВЫЕ СТИЛИ ===== */
 * {
     margin: 0;
     padding: 0;
@@ -21,30 +57,82 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    background: var(--primary-gradient);
+    background: var(--bg-page);
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
+    transition: background-color 0.3s ease;
 }
 
+/* ===== КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ ===== */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-main);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(20deg);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-color);
+}
+
+.theme-toggle:active {
+    transform: scale(1);
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+/* ===== КОНТЕЙНЕР ===== */
 .settings-container {
     width: 100%;
     max-width: 600px;
 }
 
 .settings-card {
-    background: var(--surface);
+    background: var(--bg-main);
     border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-xl);
     overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
+/* ===== HEADER ===== */
 .settings-header {
     background: var(--primary-gradient);
     padding: 30px;
     color: white;
+    position: relative;
 }
 
 .logo-section {
@@ -70,23 +158,35 @@ body {
     font-weight: 500;
 }
 
+/* ===== КОНТЕНТ ===== */
 .settings-content {
     padding: 40px;
 }
 
+/* ===== INFO BLOCK ===== */
 .info-block {
     display: flex;
     gap: 16px;
     padding: 20px;
-    background: #eff6ff;
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
     border: 2px solid #bfdbfe;
     border-radius: 12px;
     margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .info-block {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    border-color: #1e40af;
 }
 
 .info-icon {
     flex-shrink: 0;
     color: #3b82f6;
+}
+
+[data-theme="dark"] .info-icon {
+    color: #93c5fd;
 }
 
 .info-text strong {
@@ -102,6 +202,7 @@ body {
     line-height: 1.5;
 }
 
+/* ===== ФОРМА ===== */
 .form-group {
     margin-bottom: 30px;
 }
@@ -131,19 +232,28 @@ input[type="text"] {
     flex: 1;
     padding: 16px;
     padding-right: 50px;
-    border: 2px solid var(--border);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     font-size: 15px;
     font-family: 'Courier New', monospace;
     transition: all 0.2s ease;
-    background: var(--background);
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+input::placeholder {
+    color: var(--text-tertiary);
 }
 
 input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    background: white;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: var(--border-focus);
+    background: var(--bg-main);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+[data-theme="dark"] input:focus {
+    box-shadow: 0 0 0 4px rgba(129, 140, 248, 0.2);
 }
 
 .toggle-btn {
@@ -163,7 +273,7 @@ input:focus {
 }
 
 .toggle-btn:hover {
-    background: var(--border);
+    background: var(--border-color);
     color: var(--text-secondary);
 }
 
@@ -183,6 +293,7 @@ input:focus {
     text-decoration: underline;
 }
 
+/* ===== КНОПКИ ===== */
 .button-group {
     margin-bottom: 30px;
 }
@@ -205,12 +316,12 @@ input:focus {
 .btn-primary {
     background: var(--primary-gradient);
     color: white;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
 }
 
 .btn-primary:disabled {
@@ -223,6 +334,7 @@ input:focus {
     flex-shrink: 0;
 }
 
+/* ===== СТАТУС ===== */
 .status {
     padding: 16px;
     border-radius: 12px;
@@ -246,9 +358,9 @@ input:focus {
 }
 
 .status.success {
-    background: #f0fdf4;
-    color: #16a34a;
-    border: 2px solid #bbf7d0;
+    background: #ecfdf5;
+    color: #059669;
+    border: 2px solid #a7f3d0;
 }
 
 .status.error {
@@ -258,22 +370,49 @@ input:focus {
 }
 
 .status.info {
-    background: #f0f9ff;
-    color: #0369a1;
-    border: 2px solid #bae6fd;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 2px solid #bfdbfe;
 }
 
 .status.loading {
-    background: #fffbeb;
+    background: #fef3c7;
     color: #d97706;
-    border: 2px solid #fed7aa;
+    border: 2px solid #fde68a;
 }
 
+/* Темная тема для статусов */
+[data-theme="dark"] .status.success {
+    background: #064e3b;
+    color: #6ee7b7;
+    border-color: #047857;
+}
+
+[data-theme="dark"] .status.error {
+    background: #7f1d1d;
+    color: #fca5a5;
+    border-color: #991b1b;
+}
+
+[data-theme="dark"] .status.info {
+    background: #1e3a8a;
+    color: #93c5fd;
+    border-color: #1e40af;
+}
+
+[data-theme="dark"] .status.loading {
+    background: #78350f;
+    color: #fcd34d;
+    border-color: #92400e;
+}
+
+/* ===== ИНСТРУКЦИИ ===== */
 .instructions {
-    background: var(--background);
+    background: var(--bg-surface);
     padding: 24px;
     border-radius: 12px;
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
 }
 
 .instructions h3 {
@@ -304,17 +443,25 @@ input:focus {
     text-decoration: underline;
 }
 
+/* ===== ПРИМЕЧАНИЕ ===== */
 .note {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     padding: 12px;
-    background: #fef3c7;
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
     border: 1px solid #fde047;
     border-radius: 8px;
     font-size: 13px;
     color: #92400e;
     line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .note {
+    background: linear-gradient(135deg, #78350f 0%, #92400e 100%);
+    border-color: #92400e;
+    color: #fcd34d;
 }
 
 .note svg {
@@ -322,7 +469,7 @@ input:focus {
     margin-top: 2px;
 }
 
-/* Animations */
+/* ===== АНИМАЦИИ ===== */
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -333,7 +480,7 @@ input:focus {
     animation: spin 1s linear infinite;
 }
 
-/* Responsive */
+/* ===== АДАПТИВ ===== */
 @media (max-width: 640px) {
     .settings-content {
         padding: 24px;
@@ -349,5 +496,12 @@ input:focus {
 
     .logo-text h1 {
         font-size: 24px;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        top: 16px;
+        right: 16px;
     }
 }
